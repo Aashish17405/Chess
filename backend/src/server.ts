@@ -7,7 +7,8 @@ import { GameManager } from "./class/gameManager.js";
 
 const app = express();
 const port = Number(process.env.PORT ?? 8080);
-const frontendOrigin = process.env.FRONTEND_ORIGIN ?? "https://chess.dev-aashish.tech";
+const frontendOrigin =
+  process.env.FRONTEND_ORIGIN ?? "https://chess.dev-aashish.tech";
 
 app.use(
   cors({
