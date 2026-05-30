@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum GameColor {
+  WHITE
+  BLACK
+}
+
+enum GameStatus {
+  WAITING
+  ACTIVE
+  COMPLETED
+  ABANDONED
+}
+
+enum MoveResult {
+  NORMAL
+  CAPTURE
+  CHECK
+  CHECKMATE
+  STALEMATE
+  DRAW
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  username       String    @unique
+  displayName    String?
+  passwordHash   String
+  avatarUrl      String?
+  isActive       Boolean   @default(true)
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  createdById    String?
+  updatedById    String?
+  deletedById    String?
+
+  createdBy      User?     @relation("UserCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy      User?     @relation("UserUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  deletedBy      User?     @relation("UserDeletedBy", fields: [deletedById], references: [id], onDelete: SetNull)
+
+  createdUsers   User[]    @relation("UserCreatedBy")
+  updatedUsers   User[]    @relation("UserUpdatedBy")
+  deletedUsers   User[]    @relation("UserDeletedBy")
+
+  whiteGames     Game[]    @relation("WhitePlayer")
+  blackGames     Game[]    @relation("BlackPlayer")
+  createdGames   Game[]    @relation("GameCreatedBy")
+  updatedGames   Game[]    @relation("GameUpdatedBy")
+  deletedGames   Game[]    @relation("GameDeletedBy")
+
+  movesMade      GameMove[] @relation("MoveMadeBy")
+  createdMoves   GameMove[] @relation("MoveCreatedBy")
+  updatedMoves   GameMove[] @relation("MoveUpdatedBy")
+  deletedMoves   GameMove[] @relation("MoveDeletedBy")
+
+  @@index([username])
+  @@index([email])
+}
+
+model Game {
+  id              String      @id @default(cuid())
+  status          GameStatus  @default(WAITING)
+  whitePlayerId   String?
+  blackPlayerId   String?
+  winnerColor     GameColor?
+  startedAt       DateTime?
+  endedAt         DateTime?
+  lastMoveAt      DateTime?
+  initialFen      String      @default("start")
+  finalFen        String?
+  resultReason    String?
+
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  deletedAt       DateTime?
+
+  createdById     String?
+  updatedById     String?
+  deletedById     String?
+
+  whitePlayer     User?       @relation("WhitePlayer", fields: [whitePlayerId], references: [id], onDelete: SetNull)
+  blackPlayer     User?       @relation("BlackPlayer", fields: [blackPlayerId], references: [id], onDelete: SetNull)
+  createdBy       User?       @relation("GameCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy       User?       @relation("GameUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  deletedBy       User?       @relation("GameDeletedBy", fields: [deletedById], references: [id], onDelete: SetNull)
+
+  moves           GameMove[]
+
+  @@index([status])
+  @@index([whitePlayerId])
+  @@index([blackPlayerId])
+  @@index([startedAt])
+}
+
+model GameMove {
+  id             String      @id @default(cuid())
+  gameId         String
+  moveNumber     Int
+  moverId        String?
+  color          GameColor
+  fromSquare     String
+  toSquare       String
+  san            String?
+  uci            String?
+  fenBefore      String?
+  fenAfter       String?
+  result         MoveResult  @default(NORMAL)
+  timeSpentMs    Int?
+
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  deletedAt      DateTime?
+
+  createdById    String?
+  updatedById    String?
+  deletedById    String?
+
+  game           Game        @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  mover          User?       @relation("MoveMadeBy", fields: [moverId], references: [id], onDelete: SetNull)
+  createdBy      User?       @relation("MoveCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy      User?       @relation("MoveUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+  deletedBy      User?       @relation("MoveDeletedBy", fields: [deletedById], references: [id], onDelete: SetNull)
+
+  @@unique([gameId, moveNumber])
+  @@index([gameId])
+  @@index([moverId])
+  @@index([createdAt])
+}
