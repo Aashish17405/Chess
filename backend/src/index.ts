@@ -23,7 +23,9 @@ const gameManager = new GameManager();
 const allowedSocketPaths = new Set(["/", "/ws", "/socket"]);
 
 server.on("upgrade", (request: IncomingMessage, socket, head) => {
-  const requestUrl = request.url ? new URL(request.url, "http://localhost") : null;
+  const requestUrl = request.url
+    ? new URL(request.url, "http://localhost")
+    : null;
   const pathname = requestUrl?.pathname ?? "/";
 
   if (!allowedSocketPaths.has(pathname)) {

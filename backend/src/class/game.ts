@@ -1,4 +1,5 @@
 import { Chess } from "chess.js";
+import { randomUUID } from "crypto";
 import type WebSocket from "ws";
 import { prisma } from "../lib/prisma.js";
 import { GAME_OVER, INIT_GAME, INVALID_MOVE, MOVE } from "./messages.js";
@@ -16,6 +17,7 @@ export class Game {
   public startTime: Date;
   private moveCount: number;
   private isOver: boolean;
+  private persistToDb: boolean;
   private player1Identity: PlayerIdentity | null;
   private player2Identity: PlayerIdentity | null;
 
@@ -25,6 +27,7 @@ export class Game {
     player2Socket: WebSocket;
     player1: PlayerIdentity | null;
     player2: PlayerIdentity | null;
+    persistToDb: boolean;
   }) {
     this.gameId = args.gameId;
     this.player1 = args.player1Socket;
@@ -32,9 +35,11 @@ export class Game {
     this.board = new Chess();
     this.moveCount = 0;
     this.isOver = false;
+    this.persistToDb = args.persistToDb;
     this.startTime = new Date();
     this.player1Identity = args.player1;
     this.player2Identity = args.player2;
+
     this.player1.send(
       JSON.stringify({
         type: INIT_GAME,
@@ -53,26 +58,44 @@ export class Game {
         },
       }),
     );
+
+    if (!this.persistToDb) {
+      console.warn(`Game ${this.gameId} is running without persistence.`);
+    }
   }
 
   static async create(args: GameCreateArgs) {
-    const gameRecord = await prisma.game.create({
-      data: {
-        status: "ACTIVE",
-        startedAt: new Date(),
-        whitePlayerId: args.player1?.userId ?? null,
-        blackPlayerId: args.player2?.userId ?? null,
-        createdById: args.player1?.userId ?? args.player2?.userId ?? null,
-        updatedById: args.player1?.userId ?? args.player2?.userId ?? null,
-      },
-    });
+    let gameId: string = randomUUID();
+    let persistToDb = true;
+
+    try {
+      const gameRecord = await prisma.game.create({
+        data: {
+          status: "ACTIVE",
+          startedAt: new Date(),
+          whitePlayerId: args.player1?.userId ?? null,
+          blackPlayerId: args.player2?.userId ?? null,
+          createdById: args.player1?.userId ?? args.player2?.userId ?? null,
+          updatedById: args.player1?.userId ?? args.player2?.userId ?? null,
+        },
+      });
+
+      gameId = gameRecord.id;
+    } catch (error) {
+      persistToDb = false;
+      console.error(
+        "Falling back to in-memory game because persistence failed:",
+        error,
+      );
+    }
 
     return new Game({
-      gameId: gameRecord.id,
+      gameId,
       player1Socket: args.player1Socket,
       player2Socket: args.player2Socket,
       player1: args.player1,
       player2: args.player2,
+      persistToDb,
     });
   }
 
@@ -108,103 +131,16 @@ export class Game {
       console.log("early return 1");
       return;
     }
+
     if (this.moveCount % 2 === 1 && socket !== this.player2) {
       console.log("early return 2");
       return;
     }
-    console.log("did not early return");
 
     const fenBefore = this.board.fen();
+    const moveResult = this.board.move(move);
 
-    try {
-      const moveResult = this.board.move(move);
-      if (!moveResult) {
-        throw new Error("Illegal move");
-      }
-      this.moveCount++;
-
-      const fenAfter = this.board.fen();
-      const moverIdentity = this.getIdentityForPlayer(socket);
-      const moverId = moverIdentity?.userId ?? null;
-      const moveNumber = this.moveCount;
-
-      await prisma.$transaction([
-        prisma.gameMove.create({
-          data: {
-            gameId: this.gameId,
-            moveNumber,
-            moverId,
-            color:
-              this.getColorForPlayer(socket) === "white" ? "WHITE" : "BLACK",
-            fromSquare: move.from,
-            toSquare: move.to,
-            san: moveResult.san,
-            uci: `${move.from}${move.to}`,
-            fenBefore,
-            fenAfter,
-            result: this.board.isCheckmate()
-              ? "CHECKMATE"
-              : this.board.isStalemate()
-                ? "STALEMATE"
-                : this.board.isDraw()
-                  ? "DRAW"
-                  : this.board.isCheck()
-                    ? "CHECK"
-                    : "NORMAL",
-            createdById: moverId,
-            updatedById: moverId,
-          },
-        }),
-        prisma.game.update({
-          where: { id: this.gameId },
-          data: {
-            lastMoveAt: new Date(),
-            updatedById: moverId,
-          },
-        }),
-      ]);
-
-      if (this.board.isGameOver()) {
-        this.isOver = true;
-        const winner = this.getGameWinner();
-
-        await prisma.game.update({
-          where: { id: this.gameId },
-          data: {
-            status: "COMPLETED",
-            endedAt: new Date(),
-            finalFen: fenAfter,
-            winnerColor: winner === "white" ? "WHITE" : "BLACK",
-            resultReason: this.getGameResultReason(),
-            updatedById: moverId,
-          },
-        });
-
-        this.player1.send(
-          JSON.stringify({
-            type: GAME_OVER,
-            payload: {
-              winner,
-              gameId: this.gameId,
-            },
-          }),
-        );
-
-        this.player2.send(
-          JSON.stringify({
-            type: GAME_OVER,
-            payload: {
-              winner,
-              gameId: this.gameId,
-            },
-          }),
-        );
-
-        return;
-      }
-    } catch (e) {
-      console.log(move);
-      console.error("Invalid move", e);
+    if (!moveResult) {
       socket.send(
         JSON.stringify({
           type: INVALID_MOVE,
@@ -216,6 +152,104 @@ export class Game {
           },
         }),
       );
+      return;
+    }
+
+    this.moveCount += 1;
+
+    const fenAfter = this.board.fen();
+    const moverIdentity = this.getIdentityForPlayer(socket);
+    const moverId = moverIdentity?.userId ?? null;
+    const moveNumber = this.moveCount;
+
+    if (this.persistToDb) {
+      try {
+        await prisma.$transaction([
+          prisma.gameMove.create({
+            data: {
+              gameId: this.gameId,
+              moveNumber,
+              moverId,
+              color:
+                this.getColorForPlayer(socket) === "white"
+                  ? "WHITE"
+                  : "BLACK",
+              fromSquare: move.from,
+              toSquare: move.to,
+              san: moveResult.san,
+              uci: `${move.from}${move.to}`,
+              fenBefore,
+              fenAfter,
+              result: this.board.isCheckmate()
+                ? "CHECKMATE"
+                : this.board.isStalemate()
+                  ? "STALEMATE"
+                  : this.board.isDraw()
+                    ? "DRAW"
+                    : this.board.isCheck()
+                      ? "CHECK"
+                      : "NORMAL",
+              createdById: moverId,
+              updatedById: moverId,
+            },
+          }),
+          prisma.game.update({
+            where: { id: this.gameId },
+            data: {
+              lastMoveAt: new Date(),
+              updatedById: moverId,
+            },
+          }),
+        ]);
+      } catch (error) {
+        this.persistToDb = false;
+        console.error("Move persistence failed; continuing in-memory:", error);
+      }
+    }
+
+    if (this.board.isGameOver()) {
+      this.isOver = true;
+      const winner = this.getGameWinner();
+
+      if (this.persistToDb) {
+        try {
+          await prisma.game.update({
+            where: { id: this.gameId },
+            data: {
+              status: "COMPLETED",
+              endedAt: new Date(),
+              finalFen: fenAfter,
+              winnerColor: winner === "white" ? "WHITE" : "BLACK",
+              resultReason: this.getGameResultReason(),
+              updatedById: moverId,
+            },
+          });
+        } catch (error) {
+          this.persistToDb = false;
+          console.error("Game completion persistence failed:", error);
+        }
+      }
+
+      this.player1.send(
+        JSON.stringify({
+          type: GAME_OVER,
+          payload: {
+            winner,
+            gameId: this.gameId,
+          },
+        }),
+      );
+
+      this.player2.send(
+        JSON.stringify({
+          type: GAME_OVER,
+          payload: {
+            winner,
+            gameId: this.gameId,
+          },
+        }),
+      );
+
       return;
     }
 
