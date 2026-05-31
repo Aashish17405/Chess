@@ -34,17 +34,38 @@ const getWebSocketUrl = () => {
   return DEFAULT_REMOTE_WS_URL;
 };
 
+const buildWebSocketCandidates = () => {
+  const baseUrl = getWebSocketUrl();
+
+  try {
+    const parsed = new URL(baseUrl);
+    const rootCandidate = `${parsed.origin}/`;
+    const wsCandidate = `${parsed.origin}/ws`;
+
+    return Array.from(
+      new Set([baseUrl, rootCandidate, wsCandidate].map(normalizeWebSocketUrl)),
+    );
+  } catch {
+    return [baseUrl];
+  }
+};
+
 export const useSocket = () => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   const retryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
+  const candidatesRef = useRef<string[]>(buildWebSocketCandidates());
+  const candidateIndexRef = useRef(0);
   const retryCountRef = useRef(0);
 
   useEffect(() => {
     let active = true;
 
     const connect = () => {
-      const wsUrl = getWebSocketUrl();
+      const wsUrl =
+        candidatesRef.current[candidateIndexRef.current] ??
+        candidatesRef.current[0] ??
+        getWebSocketUrl();
       console.log("Connecting websocket:", wsUrl);
 
       const ws = new WebSocket(wsUrl);
@@ -57,6 +78,7 @@ export const useSocket = () => {
         }
 
         retryCountRef.current = 0;
+        candidateIndexRef.current = 0;
         setSocket(ws);
       };
 
@@ -77,6 +99,8 @@ export const useSocket = () => {
 
         const delay = Math.min(1000 * 2 ** retryCountRef.current, 10000);
         retryCountRef.current += 1;
+        candidateIndexRef.current =
+          (candidateIndexRef.current + 1) % candidatesRef.current.length;
         retryTimerRef.current = setTimeout(connect, delay);
       };
     };
