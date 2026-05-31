@@ -12,7 +12,8 @@ const normalizeWebSocketUrl = (value: string) => {
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
     const url = new URL(trimmed);
     url.protocol = url.protocol === "https:" ? "wss:" : "ws:";
-    url.pathname = url.pathname === "/" ? "/ws" : `${url.pathname.replace(/\/$/, "")}/ws`;
+    url.pathname =
+      url.pathname === "/" ? "/ws" : `${url.pathname.replace(/\/$/, "")}/ws`;
     return url.toString().replace(/\/$/, "");
   }
 
