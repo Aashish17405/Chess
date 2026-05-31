@@ -71,3 +71,8 @@ export default defineConfig([
   },
 ])
 ```
+
+## Deployment
+
+Set `VITE_WS_URL` to `wss://chess-okqd.onrender.com/ws` for production.
+If you provide `http(s)://...`, the client will convert it to `ws(s)://.../ws` automatically.
