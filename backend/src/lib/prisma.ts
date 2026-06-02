@@ -1,4 +1,3 @@
-import "dotenv/config";
 import dns from "dns";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../generated/prisma/client";
