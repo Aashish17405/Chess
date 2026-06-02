@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
-    "build": "prisma db push --accept-data-loss && prisma generate && tsc -b",
+    "build": "prisma generate && tsc -b",
     "db:reset": "prisma db push --force-reset --accept-data-loss",
     "start": "tsx src/index.ts"
   },
