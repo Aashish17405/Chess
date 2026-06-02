@@ -1,1 +1,177 @@
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, -120vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, 120vh, 0) rotate(720deg);
+    opacity: 0.9;
+  }
+}
+
+.chess-board-wrap {
+  width: min(92vw, 640px);
+}
+
+.chess-square {
+  width: clamp(2.25rem, 11.5vw, 4rem);
+  height: clamp(2.25rem, 11.5vw, 4rem);
+}
+
+.chess-square--light {
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+}
+
+.chess-square--dark {
+  background: linear-gradient(180deg, #64748b, #334155);
+}
+
+.chess-square--selected {
+  box-shadow: inset 0 0 0 4px rgba(253, 224, 71, 0.95);
+  background-image: linear-gradient(
+    180deg,
+    rgba(253, 224, 71, 0.22),
+    rgba(253, 224, 71, 0.14)
+  );
+}
+
+.chess-piece {
+  width: clamp(1.5rem, 8vw, 2.5rem);
+  height: clamp(1.5rem, 8vw, 2.5rem);
+  object-fit: contain;
+}
+
+.winner-screen {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at top, rgba(34, 197, 94, 0.22), transparent 35%),
+    radial-gradient(circle at bottom, rgba(59, 130, 246, 0.2), transparent 30%),
+    linear-gradient(180deg, #020617 0%, #0f172a 48%, #020617 100%);
+}
+
+.winner-screen__backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.4),
+    rgba(2, 6, 23, 0.9)
+  );
+}
+
+.winner-screen__glow {
+  position: absolute;
+  width: min(42vw, 420px);
+  height: min(42vw, 420px);
+  border-radius: 9999px;
+  filter: blur(40px);
+  opacity: 0.45;
+}
+
+.winner-screen__glow--left {
+  left: -6rem;
+  top: 10%;
+  background: rgba(34, 197, 94, 0.35);
+}
+
+.winner-screen__glow--right {
+  right: -6rem;
+  bottom: 8%;
+  background: rgba(59, 130, 246, 0.28);
+}
+
+.winner-screen__confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.winner-screen__piece {
+  position: absolute;
+  top: -10vh;
+  border-radius: 9999px;
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.12);
+}
+
+.winner-screen__card {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 560px);
+  padding: 1.75rem;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.winner-screen__eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(167, 243, 208, 0.85);
+}
+
+.winner-screen__title {
+  margin-top: 0.85rem;
+  margin-bottom: 0;
+  font-size: clamp(2rem, 8vw, 4rem);
+  line-height: 1;
+  color: #f8fafc;
+}
+
+.winner-screen__copy {
+  margin: 1rem auto 0;
+  max-width: 30rem;
+  color: rgba(226, 232, 240, 0.88);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.winner-screen__button {
+  margin-top: 1.5rem;
+  border: 0;
+  border-radius: 9999px;
+  padding: 0.8rem 1.35rem;
+  font-weight: 600;
+  color: #04111f;
+  background: linear-gradient(135deg, #f8fafc, #86efac);
+  box-shadow: 0 14px 30px rgba(34, 197, 94, 0.25);
+}
+
+.winner-screen__button:hover {
+  filter: brightness(1.04);
+}
+
+@media (max-width: 640px) {
+  .winner-screen {
+    padding: 1rem;
+    align-items: flex-start;
+  }
+
+  .winner-screen__card {
+    padding: 1.25rem;
+  }
+
+  .winner-screen__glow {
+    opacity: 0.3;
+  }
+}
 @import "tailwindcss";

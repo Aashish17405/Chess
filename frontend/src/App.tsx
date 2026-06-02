@@ -7,7 +7,7 @@ import AuthPage from "./pages/AuthPage";
 
 function App() {
   return (
-    <div className="h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950">
       <BrowserRouter>
         <Routes>
           <Route path="/auth" element={<AuthPage />} />

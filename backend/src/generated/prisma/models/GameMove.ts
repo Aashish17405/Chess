@@ -44,6 +44,7 @@ export type GameMoveMinAggregateOutputType = {
   color: $Enums.GameColor | null
   fromSquare: string | null
   toSquare: string | null
+  promotion: string | null
   san: string | null
   uci: string | null
   fenBefore: string | null
@@ -66,6 +67,7 @@ export type GameMoveMaxAggregateOutputType = {
   color: $Enums.GameColor | null
   fromSquare: string | null
   toSquare: string | null
+  promotion: string | null
   san: string | null
   uci: string | null
   fenBefore: string | null
@@ -88,6 +90,7 @@ export type GameMoveCountAggregateOutputType = {
   color: number
   fromSquare: number
   toSquare: number
+  promotion: number
   san: number
   uci: number
   fenBefore: number
@@ -122,6 +125,7 @@ export type GameMoveMinAggregateInputType = {
   color?: true
   fromSquare?: true
   toSquare?: true
+  promotion?: true
   san?: true
   uci?: true
   fenBefore?: true
@@ -144,6 +148,7 @@ export type GameMoveMaxAggregateInputType = {
   color?: true
   fromSquare?: true
   toSquare?: true
+  promotion?: true
   san?: true
   uci?: true
   fenBefore?: true
@@ -166,6 +171,7 @@ export type GameMoveCountAggregateInputType = {
   color?: true
   fromSquare?: true
   toSquare?: true
+  promotion?: true
   san?: true
   uci?: true
   fenBefore?: true
@@ -275,6 +281,7 @@ export type GameMoveGroupByOutputType = {
   color: $Enums.GameColor
   fromSquare: string
   toSquare: string
+  promotion: string | null
   san: string | null
   uci: string | null
   fenBefore: string | null
@@ -320,6 +327,7 @@ export type GameMoveWhereInput = {
   color?: Prisma.EnumGameColorFilter<"GameMove"> | $Enums.GameColor
   fromSquare?: Prisma.StringFilter<"GameMove"> | string
   toSquare?: Prisma.StringFilter<"GameMove"> | string
+  promotion?: Prisma.StringNullableFilter<"GameMove"> | string | null
   san?: Prisma.StringNullableFilter<"GameMove"> | string | null
   uci?: Prisma.StringNullableFilter<"GameMove"> | string | null
   fenBefore?: Prisma.StringNullableFilter<"GameMove"> | string | null
@@ -333,10 +341,6 @@ export type GameMoveWhereInput = {
   updatedById?: Prisma.StringNullableFilter<"GameMove"> | string | null
   deletedById?: Prisma.StringNullableFilter<"GameMove"> | string | null
   game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
-  mover?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type GameMoveOrderByWithRelationInput = {
@@ -347,6 +351,7 @@ export type GameMoveOrderByWithRelationInput = {
   color?: Prisma.SortOrder
   fromSquare?: Prisma.SortOrder
   toSquare?: Prisma.SortOrder
+  promotion?: Prisma.SortOrderInput | Prisma.SortOrder
   san?: Prisma.SortOrderInput | Prisma.SortOrder
   uci?: Prisma.SortOrderInput | Prisma.SortOrder
   fenBefore?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -360,10 +365,6 @@ export type GameMoveOrderByWithRelationInput = {
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
   game?: Prisma.GameOrderByWithRelationInput
-  mover?: Prisma.UserOrderByWithRelationInput
-  createdBy?: Prisma.UserOrderByWithRelationInput
-  updatedBy?: Prisma.UserOrderByWithRelationInput
-  deletedBy?: Prisma.UserOrderByWithRelationInput
 }
 
 export type GameMoveWhereUniqueInput = Prisma.AtLeast<{
@@ -378,6 +379,7 @@ export type GameMoveWhereUniqueInput = Prisma.AtLeast<{
   color?: Prisma.EnumGameColorFilter<"GameMove"> | $Enums.GameColor
   fromSquare?: Prisma.StringFilter<"GameMove"> | string
   toSquare?: Prisma.StringFilter<"GameMove"> | string
+  promotion?: Prisma.StringNullableFilter<"GameMove"> | string | null
   san?: Prisma.StringNullableFilter<"GameMove"> | string | null
   uci?: Prisma.StringNullableFilter<"GameMove"> | string | null
   fenBefore?: Prisma.StringNullableFilter<"GameMove"> | string | null
@@ -391,10 +393,6 @@ export type GameMoveWhereUniqueInput = Prisma.AtLeast<{
   updatedById?: Prisma.StringNullableFilter<"GameMove"> | string | null
   deletedById?: Prisma.StringNullableFilter<"GameMove"> | string | null
   game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
-  mover?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id" | "gameId_moveNumber">
 
 export type GameMoveOrderByWithAggregationInput = {
@@ -405,6 +403,7 @@ export type GameMoveOrderByWithAggregationInput = {
   color?: Prisma.SortOrder
   fromSquare?: Prisma.SortOrder
   toSquare?: Prisma.SortOrder
+  promotion?: Prisma.SortOrderInput | Prisma.SortOrder
   san?: Prisma.SortOrderInput | Prisma.SortOrder
   uci?: Prisma.SortOrderInput | Prisma.SortOrder
   fenBefore?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -435,6 +434,7 @@ export type GameMoveScalarWhereWithAggregatesInput = {
   color?: Prisma.EnumGameColorWithAggregatesFilter<"GameMove"> | $Enums.GameColor
   fromSquare?: Prisma.StringWithAggregatesFilter<"GameMove"> | string
   toSquare?: Prisma.StringWithAggregatesFilter<"GameMove"> | string
+  promotion?: Prisma.StringNullableWithAggregatesFilter<"GameMove"> | string | null
   san?: Prisma.StringNullableWithAggregatesFilter<"GameMove"> | string | null
   uci?: Prisma.StringNullableWithAggregatesFilter<"GameMove"> | string | null
   fenBefore?: Prisma.StringNullableWithAggregatesFilter<"GameMove"> | string | null
@@ -452,9 +452,11 @@ export type GameMoveScalarWhereWithAggregatesInput = {
 export type GameMoveCreateInput = {
   id?: string
   moveNumber: number
+  moverId?: string | null
   color: $Enums.GameColor
   fromSquare: string
   toSquare: string
+  promotion?: string | null
   san?: string | null
   uci?: string | null
   fenBefore?: string | null
@@ -464,11 +466,10 @@ export type GameMoveCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  createdById?: string | null
+  updatedById?: string | null
+  deletedById?: string | null
   game: Prisma.GameCreateNestedOneWithoutMovesInput
-  mover?: Prisma.UserCreateNestedOneWithoutMovesMadeInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMovesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMovesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMovesInput
 }
 
 export type GameMoveUncheckedCreateInput = {
@@ -479,6 +480,7 @@ export type GameMoveUncheckedCreateInput = {
   color: $Enums.GameColor
   fromSquare: string
   toSquare: string
+  promotion?: string | null
   san?: string | null
   uci?: string | null
   fenBefore?: string | null
@@ -496,9 +498,11 @@ export type GameMoveUncheckedCreateInput = {
 export type GameMoveUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
   fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
   toSquare?: Prisma.StringFieldUpdateOperationsInput | string
+  promotion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -508,11 +512,10 @@ export type GameMoveUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   game?: Prisma.GameUpdateOneRequiredWithoutMovesNestedInput
-  mover?: Prisma.UserUpdateOneWithoutMovesMadeNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedMovesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMovesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedMovesNestedInput
 }
 
 export type GameMoveUncheckedUpdateInput = {
@@ -523,6 +526,7 @@ export type GameMoveUncheckedUpdateInput = {
   color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
   fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
   toSquare?: Prisma.StringFieldUpdateOperationsInput | string
+  promotion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -545,6 +549,7 @@ export type GameMoveCreateManyInput = {
   color: $Enums.GameColor
   fromSquare: string
   toSquare: string
+  promotion?: string | null
   san?: string | null
   uci?: string | null
   fenBefore?: string | null
@@ -562,9 +567,11 @@ export type GameMoveCreateManyInput = {
 export type GameMoveUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
   fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
   toSquare?: Prisma.StringFieldUpdateOperationsInput | string
+  promotion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -574,6 +581,9 @@ export type GameMoveUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type GameMoveUncheckedUpdateManyInput = {
@@ -584,6 +594,7 @@ export type GameMoveUncheckedUpdateManyInput = {
   color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
   fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
   toSquare?: Prisma.StringFieldUpdateOperationsInput | string
+  promotion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -621,6 +632,7 @@ export type GameMoveCountOrderByAggregateInput = {
   color?: Prisma.SortOrder
   fromSquare?: Prisma.SortOrder
   toSquare?: Prisma.SortOrder
+  promotion?: Prisma.SortOrder
   san?: Prisma.SortOrder
   uci?: Prisma.SortOrder
   fenBefore?: Prisma.SortOrder
@@ -648,6 +660,7 @@ export type GameMoveMaxOrderByAggregateInput = {
   color?: Prisma.SortOrder
   fromSquare?: Prisma.SortOrder
   toSquare?: Prisma.SortOrder
+  promotion?: Prisma.SortOrder
   san?: Prisma.SortOrder
   uci?: Prisma.SortOrder
   fenBefore?: Prisma.SortOrder
@@ -670,6 +683,7 @@ export type GameMoveMinOrderByAggregateInput = {
   color?: Prisma.SortOrder
   fromSquare?: Prisma.SortOrder
   toSquare?: Prisma.SortOrder
+  promotion?: Prisma.SortOrder
   san?: Prisma.SortOrder
   uci?: Prisma.SortOrder
   fenBefore?: Prisma.SortOrder
@@ -687,174 +701,6 @@ export type GameMoveMinOrderByAggregateInput = {
 export type GameMoveSumOrderByAggregateInput = {
   moveNumber?: Prisma.SortOrder
   timeSpentMs?: Prisma.SortOrder
-}
-
-export type GameMoveCreateNestedManyWithoutMoverInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutMoverInput, Prisma.GameMoveUncheckedCreateWithoutMoverInput> | Prisma.GameMoveCreateWithoutMoverInput[] | Prisma.GameMoveUncheckedCreateWithoutMoverInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutMoverInput | Prisma.GameMoveCreateOrConnectWithoutMoverInput[]
-  createMany?: Prisma.GameMoveCreateManyMoverInputEnvelope
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-}
-
-export type GameMoveCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutCreatedByInput, Prisma.GameMoveUncheckedCreateWithoutCreatedByInput> | Prisma.GameMoveCreateWithoutCreatedByInput[] | Prisma.GameMoveUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutCreatedByInput | Prisma.GameMoveCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.GameMoveCreateManyCreatedByInputEnvelope
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-}
-
-export type GameMoveCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutUpdatedByInput, Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput> | Prisma.GameMoveCreateWithoutUpdatedByInput[] | Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutUpdatedByInput | Prisma.GameMoveCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.GameMoveCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-}
-
-export type GameMoveCreateNestedManyWithoutDeletedByInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutDeletedByInput, Prisma.GameMoveUncheckedCreateWithoutDeletedByInput> | Prisma.GameMoveCreateWithoutDeletedByInput[] | Prisma.GameMoveUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutDeletedByInput | Prisma.GameMoveCreateOrConnectWithoutDeletedByInput[]
-  createMany?: Prisma.GameMoveCreateManyDeletedByInputEnvelope
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-}
-
-export type GameMoveUncheckedCreateNestedManyWithoutMoverInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutMoverInput, Prisma.GameMoveUncheckedCreateWithoutMoverInput> | Prisma.GameMoveCreateWithoutMoverInput[] | Prisma.GameMoveUncheckedCreateWithoutMoverInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutMoverInput | Prisma.GameMoveCreateOrConnectWithoutMoverInput[]
-  createMany?: Prisma.GameMoveCreateManyMoverInputEnvelope
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-}
-
-export type GameMoveUncheckedCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutCreatedByInput, Prisma.GameMoveUncheckedCreateWithoutCreatedByInput> | Prisma.GameMoveCreateWithoutCreatedByInput[] | Prisma.GameMoveUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutCreatedByInput | Prisma.GameMoveCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.GameMoveCreateManyCreatedByInputEnvelope
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-}
-
-export type GameMoveUncheckedCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutUpdatedByInput, Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput> | Prisma.GameMoveCreateWithoutUpdatedByInput[] | Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutUpdatedByInput | Prisma.GameMoveCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.GameMoveCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-}
-
-export type GameMoveUncheckedCreateNestedManyWithoutDeletedByInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutDeletedByInput, Prisma.GameMoveUncheckedCreateWithoutDeletedByInput> | Prisma.GameMoveCreateWithoutDeletedByInput[] | Prisma.GameMoveUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutDeletedByInput | Prisma.GameMoveCreateOrConnectWithoutDeletedByInput[]
-  createMany?: Prisma.GameMoveCreateManyDeletedByInputEnvelope
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-}
-
-export type GameMoveUpdateManyWithoutMoverNestedInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutMoverInput, Prisma.GameMoveUncheckedCreateWithoutMoverInput> | Prisma.GameMoveCreateWithoutMoverInput[] | Prisma.GameMoveUncheckedCreateWithoutMoverInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutMoverInput | Prisma.GameMoveCreateOrConnectWithoutMoverInput[]
-  upsert?: Prisma.GameMoveUpsertWithWhereUniqueWithoutMoverInput | Prisma.GameMoveUpsertWithWhereUniqueWithoutMoverInput[]
-  createMany?: Prisma.GameMoveCreateManyMoverInputEnvelope
-  set?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  disconnect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  delete?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  update?: Prisma.GameMoveUpdateWithWhereUniqueWithoutMoverInput | Prisma.GameMoveUpdateWithWhereUniqueWithoutMoverInput[]
-  updateMany?: Prisma.GameMoveUpdateManyWithWhereWithoutMoverInput | Prisma.GameMoveUpdateManyWithWhereWithoutMoverInput[]
-  deleteMany?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-}
-
-export type GameMoveUpdateManyWithoutCreatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutCreatedByInput, Prisma.GameMoveUncheckedCreateWithoutCreatedByInput> | Prisma.GameMoveCreateWithoutCreatedByInput[] | Prisma.GameMoveUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutCreatedByInput | Prisma.GameMoveCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.GameMoveUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.GameMoveUpsertWithWhereUniqueWithoutCreatedByInput[]
-  createMany?: Prisma.GameMoveCreateManyCreatedByInputEnvelope
-  set?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  disconnect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  delete?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  update?: Prisma.GameMoveUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.GameMoveUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.GameMoveUpdateManyWithWhereWithoutCreatedByInput | Prisma.GameMoveUpdateManyWithWhereWithoutCreatedByInput[]
-  deleteMany?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-}
-
-export type GameMoveUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutUpdatedByInput, Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput> | Prisma.GameMoveCreateWithoutUpdatedByInput[] | Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutUpdatedByInput | Prisma.GameMoveCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.GameMoveUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.GameMoveUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.GameMoveCreateManyUpdatedByInputEnvelope
-  set?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  disconnect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  delete?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  update?: Prisma.GameMoveUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.GameMoveUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.GameMoveUpdateManyWithWhereWithoutUpdatedByInput | Prisma.GameMoveUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-}
-
-export type GameMoveUpdateManyWithoutDeletedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutDeletedByInput, Prisma.GameMoveUncheckedCreateWithoutDeletedByInput> | Prisma.GameMoveCreateWithoutDeletedByInput[] | Prisma.GameMoveUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutDeletedByInput | Prisma.GameMoveCreateOrConnectWithoutDeletedByInput[]
-  upsert?: Prisma.GameMoveUpsertWithWhereUniqueWithoutDeletedByInput | Prisma.GameMoveUpsertWithWhereUniqueWithoutDeletedByInput[]
-  createMany?: Prisma.GameMoveCreateManyDeletedByInputEnvelope
-  set?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  disconnect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  delete?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  update?: Prisma.GameMoveUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.GameMoveUpdateWithWhereUniqueWithoutDeletedByInput[]
-  updateMany?: Prisma.GameMoveUpdateManyWithWhereWithoutDeletedByInput | Prisma.GameMoveUpdateManyWithWhereWithoutDeletedByInput[]
-  deleteMany?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-}
-
-export type GameMoveUncheckedUpdateManyWithoutMoverNestedInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutMoverInput, Prisma.GameMoveUncheckedCreateWithoutMoverInput> | Prisma.GameMoveCreateWithoutMoverInput[] | Prisma.GameMoveUncheckedCreateWithoutMoverInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutMoverInput | Prisma.GameMoveCreateOrConnectWithoutMoverInput[]
-  upsert?: Prisma.GameMoveUpsertWithWhereUniqueWithoutMoverInput | Prisma.GameMoveUpsertWithWhereUniqueWithoutMoverInput[]
-  createMany?: Prisma.GameMoveCreateManyMoverInputEnvelope
-  set?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  disconnect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  delete?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  update?: Prisma.GameMoveUpdateWithWhereUniqueWithoutMoverInput | Prisma.GameMoveUpdateWithWhereUniqueWithoutMoverInput[]
-  updateMany?: Prisma.GameMoveUpdateManyWithWhereWithoutMoverInput | Prisma.GameMoveUpdateManyWithWhereWithoutMoverInput[]
-  deleteMany?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-}
-
-export type GameMoveUncheckedUpdateManyWithoutCreatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutCreatedByInput, Prisma.GameMoveUncheckedCreateWithoutCreatedByInput> | Prisma.GameMoveCreateWithoutCreatedByInput[] | Prisma.GameMoveUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutCreatedByInput | Prisma.GameMoveCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.GameMoveUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.GameMoveUpsertWithWhereUniqueWithoutCreatedByInput[]
-  createMany?: Prisma.GameMoveCreateManyCreatedByInputEnvelope
-  set?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  disconnect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  delete?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  update?: Prisma.GameMoveUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.GameMoveUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.GameMoveUpdateManyWithWhereWithoutCreatedByInput | Prisma.GameMoveUpdateManyWithWhereWithoutCreatedByInput[]
-  deleteMany?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-}
-
-export type GameMoveUncheckedUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutUpdatedByInput, Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput> | Prisma.GameMoveCreateWithoutUpdatedByInput[] | Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutUpdatedByInput | Prisma.GameMoveCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.GameMoveUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.GameMoveUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.GameMoveCreateManyUpdatedByInputEnvelope
-  set?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  disconnect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  delete?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  update?: Prisma.GameMoveUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.GameMoveUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.GameMoveUpdateManyWithWhereWithoutUpdatedByInput | Prisma.GameMoveUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-}
-
-export type GameMoveUncheckedUpdateManyWithoutDeletedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameMoveCreateWithoutDeletedByInput, Prisma.GameMoveUncheckedCreateWithoutDeletedByInput> | Prisma.GameMoveCreateWithoutDeletedByInput[] | Prisma.GameMoveUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.GameMoveCreateOrConnectWithoutDeletedByInput | Prisma.GameMoveCreateOrConnectWithoutDeletedByInput[]
-  upsert?: Prisma.GameMoveUpsertWithWhereUniqueWithoutDeletedByInput | Prisma.GameMoveUpsertWithWhereUniqueWithoutDeletedByInput[]
-  createMany?: Prisma.GameMoveCreateManyDeletedByInputEnvelope
-  set?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  disconnect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  delete?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  connect?: Prisma.GameMoveWhereUniqueInput | Prisma.GameMoveWhereUniqueInput[]
-  update?: Prisma.GameMoveUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.GameMoveUpdateWithWhereUniqueWithoutDeletedByInput[]
-  updateMany?: Prisma.GameMoveUpdateManyWithWhereWithoutDeletedByInput | Prisma.GameMoveUpdateManyWithWhereWithoutDeletedByInput[]
-  deleteMany?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
 }
 
 export type GameMoveCreateNestedManyWithoutGameInput = {
@@ -923,309 +769,14 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type GameMoveCreateWithoutMoverInput = {
-  id?: string
-  moveNumber: number
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  game: Prisma.GameCreateNestedOneWithoutMovesInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMovesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMovesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMovesInput
-}
-
-export type GameMoveUncheckedCreateWithoutMoverInput = {
-  id?: string
-  gameId: string
-  moveNumber: number
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-}
-
-export type GameMoveCreateOrConnectWithoutMoverInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameMoveCreateWithoutMoverInput, Prisma.GameMoveUncheckedCreateWithoutMoverInput>
-}
-
-export type GameMoveCreateManyMoverInputEnvelope = {
-  data: Prisma.GameMoveCreateManyMoverInput | Prisma.GameMoveCreateManyMoverInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameMoveCreateWithoutCreatedByInput = {
-  id?: string
-  moveNumber: number
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  game: Prisma.GameCreateNestedOneWithoutMovesInput
-  mover?: Prisma.UserCreateNestedOneWithoutMovesMadeInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMovesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMovesInput
-}
-
-export type GameMoveUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  gameId: string
-  moveNumber: number
-  moverId?: string | null
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
-}
-
-export type GameMoveCreateOrConnectWithoutCreatedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameMoveCreateWithoutCreatedByInput, Prisma.GameMoveUncheckedCreateWithoutCreatedByInput>
-}
-
-export type GameMoveCreateManyCreatedByInputEnvelope = {
-  data: Prisma.GameMoveCreateManyCreatedByInput | Prisma.GameMoveCreateManyCreatedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameMoveCreateWithoutUpdatedByInput = {
-  id?: string
-  moveNumber: number
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  game: Prisma.GameCreateNestedOneWithoutMovesInput
-  mover?: Prisma.UserCreateNestedOneWithoutMovesMadeInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMovesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMovesInput
-}
-
-export type GameMoveUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  gameId: string
-  moveNumber: number
-  moverId?: string | null
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
-}
-
-export type GameMoveCreateOrConnectWithoutUpdatedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameMoveCreateWithoutUpdatedByInput, Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type GameMoveCreateManyUpdatedByInputEnvelope = {
-  data: Prisma.GameMoveCreateManyUpdatedByInput | Prisma.GameMoveCreateManyUpdatedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameMoveCreateWithoutDeletedByInput = {
-  id?: string
-  moveNumber: number
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  game: Prisma.GameCreateNestedOneWithoutMovesInput
-  mover?: Prisma.UserCreateNestedOneWithoutMovesMadeInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMovesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMovesInput
-}
-
-export type GameMoveUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  gameId: string
-  moveNumber: number
-  moverId?: string | null
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-}
-
-export type GameMoveCreateOrConnectWithoutDeletedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameMoveCreateWithoutDeletedByInput, Prisma.GameMoveUncheckedCreateWithoutDeletedByInput>
-}
-
-export type GameMoveCreateManyDeletedByInputEnvelope = {
-  data: Prisma.GameMoveCreateManyDeletedByInput | Prisma.GameMoveCreateManyDeletedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameMoveUpsertWithWhereUniqueWithoutMoverInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameMoveUpdateWithoutMoverInput, Prisma.GameMoveUncheckedUpdateWithoutMoverInput>
-  create: Prisma.XOR<Prisma.GameMoveCreateWithoutMoverInput, Prisma.GameMoveUncheckedCreateWithoutMoverInput>
-}
-
-export type GameMoveUpdateWithWhereUniqueWithoutMoverInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameMoveUpdateWithoutMoverInput, Prisma.GameMoveUncheckedUpdateWithoutMoverInput>
-}
-
-export type GameMoveUpdateManyWithWhereWithoutMoverInput = {
-  where: Prisma.GameMoveScalarWhereInput
-  data: Prisma.XOR<Prisma.GameMoveUpdateManyMutationInput, Prisma.GameMoveUncheckedUpdateManyWithoutMoverInput>
-}
-
-export type GameMoveScalarWhereInput = {
-  AND?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-  OR?: Prisma.GameMoveScalarWhereInput[]
-  NOT?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
-  id?: Prisma.StringFilter<"GameMove"> | string
-  gameId?: Prisma.StringFilter<"GameMove"> | string
-  moveNumber?: Prisma.IntFilter<"GameMove"> | number
-  moverId?: Prisma.StringNullableFilter<"GameMove"> | string | null
-  color?: Prisma.EnumGameColorFilter<"GameMove"> | $Enums.GameColor
-  fromSquare?: Prisma.StringFilter<"GameMove"> | string
-  toSquare?: Prisma.StringFilter<"GameMove"> | string
-  san?: Prisma.StringNullableFilter<"GameMove"> | string | null
-  uci?: Prisma.StringNullableFilter<"GameMove"> | string | null
-  fenBefore?: Prisma.StringNullableFilter<"GameMove"> | string | null
-  fenAfter?: Prisma.StringNullableFilter<"GameMove"> | string | null
-  result?: Prisma.EnumMoveResultFilter<"GameMove"> | $Enums.MoveResult
-  timeSpentMs?: Prisma.IntNullableFilter<"GameMove"> | number | null
-  createdAt?: Prisma.DateTimeFilter<"GameMove"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"GameMove"> | Date | string
-  deletedAt?: Prisma.DateTimeNullableFilter<"GameMove"> | Date | string | null
-  createdById?: Prisma.StringNullableFilter<"GameMove"> | string | null
-  updatedById?: Prisma.StringNullableFilter<"GameMove"> | string | null
-  deletedById?: Prisma.StringNullableFilter<"GameMove"> | string | null
-}
-
-export type GameMoveUpsertWithWhereUniqueWithoutCreatedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameMoveUpdateWithoutCreatedByInput, Prisma.GameMoveUncheckedUpdateWithoutCreatedByInput>
-  create: Prisma.XOR<Prisma.GameMoveCreateWithoutCreatedByInput, Prisma.GameMoveUncheckedCreateWithoutCreatedByInput>
-}
-
-export type GameMoveUpdateWithWhereUniqueWithoutCreatedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameMoveUpdateWithoutCreatedByInput, Prisma.GameMoveUncheckedUpdateWithoutCreatedByInput>
-}
-
-export type GameMoveUpdateManyWithWhereWithoutCreatedByInput = {
-  where: Prisma.GameMoveScalarWhereInput
-  data: Prisma.XOR<Prisma.GameMoveUpdateManyMutationInput, Prisma.GameMoveUncheckedUpdateManyWithoutCreatedByInput>
-}
-
-export type GameMoveUpsertWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameMoveUpdateWithoutUpdatedByInput, Prisma.GameMoveUncheckedUpdateWithoutUpdatedByInput>
-  create: Prisma.XOR<Prisma.GameMoveCreateWithoutUpdatedByInput, Prisma.GameMoveUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type GameMoveUpdateWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameMoveUpdateWithoutUpdatedByInput, Prisma.GameMoveUncheckedUpdateWithoutUpdatedByInput>
-}
-
-export type GameMoveUpdateManyWithWhereWithoutUpdatedByInput = {
-  where: Prisma.GameMoveScalarWhereInput
-  data: Prisma.XOR<Prisma.GameMoveUpdateManyMutationInput, Prisma.GameMoveUncheckedUpdateManyWithoutUpdatedByInput>
-}
-
-export type GameMoveUpsertWithWhereUniqueWithoutDeletedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameMoveUpdateWithoutDeletedByInput, Prisma.GameMoveUncheckedUpdateWithoutDeletedByInput>
-  create: Prisma.XOR<Prisma.GameMoveCreateWithoutDeletedByInput, Prisma.GameMoveUncheckedCreateWithoutDeletedByInput>
-}
-
-export type GameMoveUpdateWithWhereUniqueWithoutDeletedByInput = {
-  where: Prisma.GameMoveWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameMoveUpdateWithoutDeletedByInput, Prisma.GameMoveUncheckedUpdateWithoutDeletedByInput>
-}
-
-export type GameMoveUpdateManyWithWhereWithoutDeletedByInput = {
-  where: Prisma.GameMoveScalarWhereInput
-  data: Prisma.XOR<Prisma.GameMoveUpdateManyMutationInput, Prisma.GameMoveUncheckedUpdateManyWithoutDeletedByInput>
-}
-
 export type GameMoveCreateWithoutGameInput = {
   id?: string
   moveNumber: number
+  moverId?: string | null
   color: $Enums.GameColor
   fromSquare: string
   toSquare: string
+  promotion?: string | null
   san?: string | null
   uci?: string | null
   fenBefore?: string | null
@@ -1235,10 +786,9 @@ export type GameMoveCreateWithoutGameInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  mover?: Prisma.UserCreateNestedOneWithoutMovesMadeInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedMovesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedMovesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedMovesInput
+  createdById?: string | null
+  updatedById?: string | null
+  deletedById?: string | null
 }
 
 export type GameMoveUncheckedCreateWithoutGameInput = {
@@ -1248,6 +798,7 @@ export type GameMoveUncheckedCreateWithoutGameInput = {
   color: $Enums.GameColor
   fromSquare: string
   toSquare: string
+  promotion?: string | null
   san?: string | null
   uci?: string | null
   fenBefore?: string | null
@@ -1288,340 +839,30 @@ export type GameMoveUpdateManyWithWhereWithoutGameInput = {
   data: Prisma.XOR<Prisma.GameMoveUpdateManyMutationInput, Prisma.GameMoveUncheckedUpdateManyWithoutGameInput>
 }
 
-export type GameMoveCreateManyMoverInput = {
-  id?: string
-  gameId: string
-  moveNumber: number
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-}
-
-export type GameMoveCreateManyCreatedByInput = {
-  id?: string
-  gameId: string
-  moveNumber: number
-  moverId?: string | null
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
-}
-
-export type GameMoveCreateManyUpdatedByInput = {
-  id?: string
-  gameId: string
-  moveNumber: number
-  moverId?: string | null
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
-}
-
-export type GameMoveCreateManyDeletedByInput = {
-  id?: string
-  gameId: string
-  moveNumber: number
-  moverId?: string | null
-  color: $Enums.GameColor
-  fromSquare: string
-  toSquare: string
-  san?: string | null
-  uci?: string | null
-  fenBefore?: string | null
-  fenAfter?: string | null
-  result?: $Enums.MoveResult
-  timeSpentMs?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-}
-
-export type GameMoveUpdateWithoutMoverInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  game?: Prisma.GameUpdateOneRequiredWithoutMovesNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedMovesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMovesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedMovesNestedInput
-}
-
-export type GameMoveUncheckedUpdateWithoutMoverInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gameId?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameMoveUncheckedUpdateManyWithoutMoverInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gameId?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameMoveUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  game?: Prisma.GameUpdateOneRequiredWithoutMovesNestedInput
-  mover?: Prisma.UserUpdateOneWithoutMovesMadeNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMovesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedMovesNestedInput
-}
-
-export type GameMoveUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gameId?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameMoveUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gameId?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameMoveUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  game?: Prisma.GameUpdateOneRequiredWithoutMovesNestedInput
-  mover?: Prisma.UserUpdateOneWithoutMovesMadeNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedMovesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedMovesNestedInput
-}
-
-export type GameMoveUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gameId?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameMoveUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gameId?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameMoveUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  game?: Prisma.GameUpdateOneRequiredWithoutMovesNestedInput
-  mover?: Prisma.UserUpdateOneWithoutMovesMadeNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedMovesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMovesNestedInput
-}
-
-export type GameMoveUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gameId?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameMoveUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  gameId?: Prisma.StringFieldUpdateOperationsInput | string
-  moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
-  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
-  fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  toSquare?: Prisma.StringFieldUpdateOperationsInput | string
-  san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fenAfter?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  result?: Prisma.EnumMoveResultFieldUpdateOperationsInput | $Enums.MoveResult
-  timeSpentMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+export type GameMoveScalarWhereInput = {
+  AND?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
+  OR?: Prisma.GameMoveScalarWhereInput[]
+  NOT?: Prisma.GameMoveScalarWhereInput | Prisma.GameMoveScalarWhereInput[]
+  id?: Prisma.StringFilter<"GameMove"> | string
+  gameId?: Prisma.StringFilter<"GameMove"> | string
+  moveNumber?: Prisma.IntFilter<"GameMove"> | number
+  moverId?: Prisma.StringNullableFilter<"GameMove"> | string | null
+  color?: Prisma.EnumGameColorFilter<"GameMove"> | $Enums.GameColor
+  fromSquare?: Prisma.StringFilter<"GameMove"> | string
+  toSquare?: Prisma.StringFilter<"GameMove"> | string
+  promotion?: Prisma.StringNullableFilter<"GameMove"> | string | null
+  san?: Prisma.StringNullableFilter<"GameMove"> | string | null
+  uci?: Prisma.StringNullableFilter<"GameMove"> | string | null
+  fenBefore?: Prisma.StringNullableFilter<"GameMove"> | string | null
+  fenAfter?: Prisma.StringNullableFilter<"GameMove"> | string | null
+  result?: Prisma.EnumMoveResultFilter<"GameMove"> | $Enums.MoveResult
+  timeSpentMs?: Prisma.IntNullableFilter<"GameMove"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"GameMove"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"GameMove"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"GameMove"> | Date | string | null
+  createdById?: Prisma.StringNullableFilter<"GameMove"> | string | null
+  updatedById?: Prisma.StringNullableFilter<"GameMove"> | string | null
+  deletedById?: Prisma.StringNullableFilter<"GameMove"> | string | null
 }
 
 export type GameMoveCreateManyGameInput = {
@@ -1631,6 +872,7 @@ export type GameMoveCreateManyGameInput = {
   color: $Enums.GameColor
   fromSquare: string
   toSquare: string
+  promotion?: string | null
   san?: string | null
   uci?: string | null
   fenBefore?: string | null
@@ -1648,9 +890,11 @@ export type GameMoveCreateManyGameInput = {
 export type GameMoveUpdateWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   moveNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  moverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
   fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
   toSquare?: Prisma.StringFieldUpdateOperationsInput | string
+  promotion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1660,10 +904,9 @@ export type GameMoveUpdateWithoutGameInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  mover?: Prisma.UserUpdateOneWithoutMovesMadeNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedMovesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedMovesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedMovesNestedInput
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type GameMoveUncheckedUpdateWithoutGameInput = {
@@ -1673,6 +916,7 @@ export type GameMoveUncheckedUpdateWithoutGameInput = {
   color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
   fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
   toSquare?: Prisma.StringFieldUpdateOperationsInput | string
+  promotion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1694,6 +938,7 @@ export type GameMoveUncheckedUpdateManyWithoutGameInput = {
   color?: Prisma.EnumGameColorFieldUpdateOperationsInput | $Enums.GameColor
   fromSquare?: Prisma.StringFieldUpdateOperationsInput | string
   toSquare?: Prisma.StringFieldUpdateOperationsInput | string
+  promotion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   san?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   uci?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fenBefore?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1718,6 +963,7 @@ export type GameMoveSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   color?: boolean
   fromSquare?: boolean
   toSquare?: boolean
+  promotion?: boolean
   san?: boolean
   uci?: boolean
   fenBefore?: boolean
@@ -1731,10 +977,6 @@ export type GameMoveSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   updatedById?: boolean
   deletedById?: boolean
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
-  mover?: boolean | Prisma.GameMove$moverArgs<ExtArgs>
-  createdBy?: boolean | Prisma.GameMove$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GameMove$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.GameMove$deletedByArgs<ExtArgs>
 }, ExtArgs["result"]["gameMove"]>
 
 export type GameMoveSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1745,6 +987,7 @@ export type GameMoveSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   color?: boolean
   fromSquare?: boolean
   toSquare?: boolean
+  promotion?: boolean
   san?: boolean
   uci?: boolean
   fenBefore?: boolean
@@ -1758,10 +1001,6 @@ export type GameMoveSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   updatedById?: boolean
   deletedById?: boolean
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
-  mover?: boolean | Prisma.GameMove$moverArgs<ExtArgs>
-  createdBy?: boolean | Prisma.GameMove$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GameMove$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.GameMove$deletedByArgs<ExtArgs>
 }, ExtArgs["result"]["gameMove"]>
 
 export type GameMoveSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1772,6 +1011,7 @@ export type GameMoveSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   color?: boolean
   fromSquare?: boolean
   toSquare?: boolean
+  promotion?: boolean
   san?: boolean
   uci?: boolean
   fenBefore?: boolean
@@ -1785,10 +1025,6 @@ export type GameMoveSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   updatedById?: boolean
   deletedById?: boolean
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
-  mover?: boolean | Prisma.GameMove$moverArgs<ExtArgs>
-  createdBy?: boolean | Prisma.GameMove$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GameMove$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.GameMove$deletedByArgs<ExtArgs>
 }, ExtArgs["result"]["gameMove"]>
 
 export type GameMoveSelectScalar = {
@@ -1799,6 +1035,7 @@ export type GameMoveSelectScalar = {
   color?: boolean
   fromSquare?: boolean
   toSquare?: boolean
+  promotion?: boolean
   san?: boolean
   uci?: boolean
   fenBefore?: boolean
@@ -1813,37 +1050,21 @@ export type GameMoveSelectScalar = {
   deletedById?: boolean
 }
 
-export type GameMoveOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gameId" | "moveNumber" | "moverId" | "color" | "fromSquare" | "toSquare" | "san" | "uci" | "fenBefore" | "fenAfter" | "result" | "timeSpentMs" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["gameMove"]>
+export type GameMoveOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gameId" | "moveNumber" | "moverId" | "color" | "fromSquare" | "toSquare" | "promotion" | "san" | "uci" | "fenBefore" | "fenAfter" | "result" | "timeSpentMs" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["gameMove"]>
 export type GameMoveInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
-  mover?: boolean | Prisma.GameMove$moverArgs<ExtArgs>
-  createdBy?: boolean | Prisma.GameMove$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GameMove$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.GameMove$deletedByArgs<ExtArgs>
 }
 export type GameMoveIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
-  mover?: boolean | Prisma.GameMove$moverArgs<ExtArgs>
-  createdBy?: boolean | Prisma.GameMove$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GameMove$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.GameMove$deletedByArgs<ExtArgs>
 }
 export type GameMoveIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
-  mover?: boolean | Prisma.GameMove$moverArgs<ExtArgs>
-  createdBy?: boolean | Prisma.GameMove$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.GameMove$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.GameMove$deletedByArgs<ExtArgs>
 }
 
 export type $GameMovePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "GameMove"
   objects: {
     game: Prisma.$GamePayload<ExtArgs>
-    mover: Prisma.$UserPayload<ExtArgs> | null
-    createdBy: Prisma.$UserPayload<ExtArgs> | null
-    updatedBy: Prisma.$UserPayload<ExtArgs> | null
-    deletedBy: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1853,6 +1074,7 @@ export type $GameMovePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     color: $Enums.GameColor
     fromSquare: string
     toSquare: string
+    promotion: string | null
     san: string | null
     uci: string | null
     fenBefore: string | null
@@ -2260,10 +1482,6 @@ readonly fields: GameMoveFieldRefs;
 export interface Prisma__GameMoveClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   game<T extends Prisma.GameDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameDefaultArgs<ExtArgs>>): Prisma.Prisma__GameClient<runtime.Types.Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  mover<T extends Prisma.GameMove$moverArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameMove$moverArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.GameMove$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameMove$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  updatedBy<T extends Prisma.GameMove$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameMove$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  deletedBy<T extends Prisma.GameMove$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameMove$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2300,6 +1518,7 @@ export interface GameMoveFieldRefs {
   readonly color: Prisma.FieldRef<"GameMove", 'GameColor'>
   readonly fromSquare: Prisma.FieldRef<"GameMove", 'String'>
   readonly toSquare: Prisma.FieldRef<"GameMove", 'String'>
+  readonly promotion: Prisma.FieldRef<"GameMove", 'String'>
   readonly san: Prisma.FieldRef<"GameMove", 'String'>
   readonly uci: Prisma.FieldRef<"GameMove", 'String'>
   readonly fenBefore: Prisma.FieldRef<"GameMove", 'String'>
@@ -2710,82 +1929,6 @@ export type GameMoveDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many GameMoves to delete.
    */
   limit?: number
-}
-
-/**
- * GameMove.mover
- */
-export type GameMove$moverArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * GameMove.createdBy
- */
-export type GameMove$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * GameMove.updatedBy
- */
-export type GameMove$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * GameMove.deletedBy
- */
-export type GameMove$deletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
 }
 
 /**

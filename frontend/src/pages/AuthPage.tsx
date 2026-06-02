@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
-
-type AuthMode = "login" | "signup";
+import type { AuthMode } from "../types";
 
 export default function AuthPage() {
   const navigate = useNavigate();

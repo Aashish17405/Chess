@@ -278,11 +278,6 @@ export type GameWhereInput = {
   createdById?: Prisma.StringNullableFilter<"Game"> | string | null
   updatedById?: Prisma.StringNullableFilter<"Game"> | string | null
   deletedById?: Prisma.StringNullableFilter<"Game"> | string | null
-  whitePlayer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  blackPlayer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   moves?: Prisma.GameMoveListRelationFilter
 }
 
@@ -304,11 +299,6 @@ export type GameOrderByWithRelationInput = {
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedById?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedById?: Prisma.SortOrderInput | Prisma.SortOrder
-  whitePlayer?: Prisma.UserOrderByWithRelationInput
-  blackPlayer?: Prisma.UserOrderByWithRelationInput
-  createdBy?: Prisma.UserOrderByWithRelationInput
-  updatedBy?: Prisma.UserOrderByWithRelationInput
-  deletedBy?: Prisma.UserOrderByWithRelationInput
   moves?: Prisma.GameMoveOrderByRelationAggregateInput
 }
 
@@ -333,11 +323,6 @@ export type GameWhereUniqueInput = Prisma.AtLeast<{
   createdById?: Prisma.StringNullableFilter<"Game"> | string | null
   updatedById?: Prisma.StringNullableFilter<"Game"> | string | null
   deletedById?: Prisma.StringNullableFilter<"Game"> | string | null
-  whitePlayer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  blackPlayer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  updatedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  deletedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   moves?: Prisma.GameMoveListRelationFilter
 }, "id">
 
@@ -390,6 +375,8 @@ export type GameScalarWhereWithAggregatesInput = {
 export type GameCreateInput = {
   id?: string
   status?: $Enums.GameStatus
+  whitePlayerId?: string | null
+  blackPlayerId?: string | null
   winnerColor?: $Enums.GameColor | null
   startedAt?: Date | string | null
   endedAt?: Date | string | null
@@ -400,11 +387,9 @@ export type GameCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  whitePlayer?: Prisma.UserCreateNestedOneWithoutWhiteGamesInput
-  blackPlayer?: Prisma.UserCreateNestedOneWithoutBlackGamesInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedGamesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedGamesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedGamesInput
+  createdById?: string | null
+  updatedById?: string | null
+  deletedById?: string | null
   moves?: Prisma.GameMoveCreateNestedManyWithoutGameInput
 }
 
@@ -432,6 +417,8 @@ export type GameUncheckedCreateInput = {
 export type GameUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
+  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -442,11 +429,9 @@ export type GameUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  whitePlayer?: Prisma.UserUpdateOneWithoutWhiteGamesNestedInput
-  blackPlayer?: Prisma.UserUpdateOneWithoutBlackGamesNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedGamesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedGamesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedGamesNestedInput
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   moves?: Prisma.GameMoveUpdateManyWithoutGameNestedInput
 }
 
@@ -494,6 +479,8 @@ export type GameCreateManyInput = {
 export type GameUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
+  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -504,6 +491,9 @@ export type GameUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type GameUncheckedUpdateManyInput = {
@@ -524,16 +514,6 @@ export type GameUncheckedUpdateManyInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameListRelationFilter = {
-  every?: Prisma.GameWhereInput
-  some?: Prisma.GameWhereInput
-  none?: Prisma.GameWhereInput
-}
-
-export type GameOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type GameCountOrderByAggregateInput = {
@@ -601,222 +581,28 @@ export type GameScalarRelationFilter = {
   isNot?: Prisma.GameWhereInput
 }
 
-export type GameCreateNestedManyWithoutWhitePlayerInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutWhitePlayerInput, Prisma.GameUncheckedCreateWithoutWhitePlayerInput> | Prisma.GameCreateWithoutWhitePlayerInput[] | Prisma.GameUncheckedCreateWithoutWhitePlayerInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutWhitePlayerInput | Prisma.GameCreateOrConnectWithoutWhitePlayerInput[]
-  createMany?: Prisma.GameCreateManyWhitePlayerInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameCreateNestedManyWithoutBlackPlayerInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutBlackPlayerInput, Prisma.GameUncheckedCreateWithoutBlackPlayerInput> | Prisma.GameCreateWithoutBlackPlayerInput[] | Prisma.GameUncheckedCreateWithoutBlackPlayerInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutBlackPlayerInput | Prisma.GameCreateOrConnectWithoutBlackPlayerInput[]
-  createMany?: Prisma.GameCreateManyBlackPlayerInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutCreatedByInput, Prisma.GameUncheckedCreateWithoutCreatedByInput> | Prisma.GameCreateWithoutCreatedByInput[] | Prisma.GameUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutCreatedByInput | Prisma.GameCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.GameCreateManyCreatedByInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutUpdatedByInput, Prisma.GameUncheckedCreateWithoutUpdatedByInput> | Prisma.GameCreateWithoutUpdatedByInput[] | Prisma.GameUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutUpdatedByInput | Prisma.GameCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.GameCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameCreateNestedManyWithoutDeletedByInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutDeletedByInput, Prisma.GameUncheckedCreateWithoutDeletedByInput> | Prisma.GameCreateWithoutDeletedByInput[] | Prisma.GameUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutDeletedByInput | Prisma.GameCreateOrConnectWithoutDeletedByInput[]
-  createMany?: Prisma.GameCreateManyDeletedByInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameUncheckedCreateNestedManyWithoutWhitePlayerInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutWhitePlayerInput, Prisma.GameUncheckedCreateWithoutWhitePlayerInput> | Prisma.GameCreateWithoutWhitePlayerInput[] | Prisma.GameUncheckedCreateWithoutWhitePlayerInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutWhitePlayerInput | Prisma.GameCreateOrConnectWithoutWhitePlayerInput[]
-  createMany?: Prisma.GameCreateManyWhitePlayerInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameUncheckedCreateNestedManyWithoutBlackPlayerInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutBlackPlayerInput, Prisma.GameUncheckedCreateWithoutBlackPlayerInput> | Prisma.GameCreateWithoutBlackPlayerInput[] | Prisma.GameUncheckedCreateWithoutBlackPlayerInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutBlackPlayerInput | Prisma.GameCreateOrConnectWithoutBlackPlayerInput[]
-  createMany?: Prisma.GameCreateManyBlackPlayerInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameUncheckedCreateNestedManyWithoutCreatedByInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutCreatedByInput, Prisma.GameUncheckedCreateWithoutCreatedByInput> | Prisma.GameCreateWithoutCreatedByInput[] | Prisma.GameUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutCreatedByInput | Prisma.GameCreateOrConnectWithoutCreatedByInput[]
-  createMany?: Prisma.GameCreateManyCreatedByInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameUncheckedCreateNestedManyWithoutUpdatedByInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutUpdatedByInput, Prisma.GameUncheckedCreateWithoutUpdatedByInput> | Prisma.GameCreateWithoutUpdatedByInput[] | Prisma.GameUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutUpdatedByInput | Prisma.GameCreateOrConnectWithoutUpdatedByInput[]
-  createMany?: Prisma.GameCreateManyUpdatedByInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameUncheckedCreateNestedManyWithoutDeletedByInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutDeletedByInput, Prisma.GameUncheckedCreateWithoutDeletedByInput> | Prisma.GameCreateWithoutDeletedByInput[] | Prisma.GameUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutDeletedByInput | Prisma.GameCreateOrConnectWithoutDeletedByInput[]
-  createMany?: Prisma.GameCreateManyDeletedByInputEnvelope
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-}
-
-export type GameUpdateManyWithoutWhitePlayerNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutWhitePlayerInput, Prisma.GameUncheckedCreateWithoutWhitePlayerInput> | Prisma.GameCreateWithoutWhitePlayerInput[] | Prisma.GameUncheckedCreateWithoutWhitePlayerInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutWhitePlayerInput | Prisma.GameCreateOrConnectWithoutWhitePlayerInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutWhitePlayerInput | Prisma.GameUpsertWithWhereUniqueWithoutWhitePlayerInput[]
-  createMany?: Prisma.GameCreateManyWhitePlayerInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutWhitePlayerInput | Prisma.GameUpdateWithWhereUniqueWithoutWhitePlayerInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutWhitePlayerInput | Prisma.GameUpdateManyWithWhereWithoutWhitePlayerInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUpdateManyWithoutBlackPlayerNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutBlackPlayerInput, Prisma.GameUncheckedCreateWithoutBlackPlayerInput> | Prisma.GameCreateWithoutBlackPlayerInput[] | Prisma.GameUncheckedCreateWithoutBlackPlayerInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutBlackPlayerInput | Prisma.GameCreateOrConnectWithoutBlackPlayerInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutBlackPlayerInput | Prisma.GameUpsertWithWhereUniqueWithoutBlackPlayerInput[]
-  createMany?: Prisma.GameCreateManyBlackPlayerInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutBlackPlayerInput | Prisma.GameUpdateWithWhereUniqueWithoutBlackPlayerInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutBlackPlayerInput | Prisma.GameUpdateManyWithWhereWithoutBlackPlayerInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUpdateManyWithoutCreatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutCreatedByInput, Prisma.GameUncheckedCreateWithoutCreatedByInput> | Prisma.GameCreateWithoutCreatedByInput[] | Prisma.GameUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutCreatedByInput | Prisma.GameCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.GameUpsertWithWhereUniqueWithoutCreatedByInput[]
-  createMany?: Prisma.GameCreateManyCreatedByInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.GameUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutCreatedByInput | Prisma.GameUpdateManyWithWhereWithoutCreatedByInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutUpdatedByInput, Prisma.GameUncheckedCreateWithoutUpdatedByInput> | Prisma.GameCreateWithoutUpdatedByInput[] | Prisma.GameUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutUpdatedByInput | Prisma.GameCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.GameUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.GameCreateManyUpdatedByInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.GameUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutUpdatedByInput | Prisma.GameUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUpdateManyWithoutDeletedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutDeletedByInput, Prisma.GameUncheckedCreateWithoutDeletedByInput> | Prisma.GameCreateWithoutDeletedByInput[] | Prisma.GameUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutDeletedByInput | Prisma.GameCreateOrConnectWithoutDeletedByInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutDeletedByInput | Prisma.GameUpsertWithWhereUniqueWithoutDeletedByInput[]
-  createMany?: Prisma.GameCreateManyDeletedByInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.GameUpdateWithWhereUniqueWithoutDeletedByInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutDeletedByInput | Prisma.GameUpdateManyWithWhereWithoutDeletedByInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUncheckedUpdateManyWithoutWhitePlayerNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutWhitePlayerInput, Prisma.GameUncheckedCreateWithoutWhitePlayerInput> | Prisma.GameCreateWithoutWhitePlayerInput[] | Prisma.GameUncheckedCreateWithoutWhitePlayerInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutWhitePlayerInput | Prisma.GameCreateOrConnectWithoutWhitePlayerInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutWhitePlayerInput | Prisma.GameUpsertWithWhereUniqueWithoutWhitePlayerInput[]
-  createMany?: Prisma.GameCreateManyWhitePlayerInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutWhitePlayerInput | Prisma.GameUpdateWithWhereUniqueWithoutWhitePlayerInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutWhitePlayerInput | Prisma.GameUpdateManyWithWhereWithoutWhitePlayerInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUncheckedUpdateManyWithoutBlackPlayerNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutBlackPlayerInput, Prisma.GameUncheckedCreateWithoutBlackPlayerInput> | Prisma.GameCreateWithoutBlackPlayerInput[] | Prisma.GameUncheckedCreateWithoutBlackPlayerInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutBlackPlayerInput | Prisma.GameCreateOrConnectWithoutBlackPlayerInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutBlackPlayerInput | Prisma.GameUpsertWithWhereUniqueWithoutBlackPlayerInput[]
-  createMany?: Prisma.GameCreateManyBlackPlayerInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutBlackPlayerInput | Prisma.GameUpdateWithWhereUniqueWithoutBlackPlayerInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutBlackPlayerInput | Prisma.GameUpdateManyWithWhereWithoutBlackPlayerInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUncheckedUpdateManyWithoutCreatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutCreatedByInput, Prisma.GameUncheckedCreateWithoutCreatedByInput> | Prisma.GameCreateWithoutCreatedByInput[] | Prisma.GameUncheckedCreateWithoutCreatedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutCreatedByInput | Prisma.GameCreateOrConnectWithoutCreatedByInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutCreatedByInput | Prisma.GameUpsertWithWhereUniqueWithoutCreatedByInput[]
-  createMany?: Prisma.GameCreateManyCreatedByInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutCreatedByInput | Prisma.GameUpdateWithWhereUniqueWithoutCreatedByInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutCreatedByInput | Prisma.GameUpdateManyWithWhereWithoutCreatedByInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUncheckedUpdateManyWithoutUpdatedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutUpdatedByInput, Prisma.GameUncheckedCreateWithoutUpdatedByInput> | Prisma.GameCreateWithoutUpdatedByInput[] | Prisma.GameUncheckedCreateWithoutUpdatedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutUpdatedByInput | Prisma.GameCreateOrConnectWithoutUpdatedByInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutUpdatedByInput | Prisma.GameUpsertWithWhereUniqueWithoutUpdatedByInput[]
-  createMany?: Prisma.GameCreateManyUpdatedByInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutUpdatedByInput | Prisma.GameUpdateWithWhereUniqueWithoutUpdatedByInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutUpdatedByInput | Prisma.GameUpdateManyWithWhereWithoutUpdatedByInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-}
-
-export type GameUncheckedUpdateManyWithoutDeletedByNestedInput = {
-  create?: Prisma.XOR<Prisma.GameCreateWithoutDeletedByInput, Prisma.GameUncheckedCreateWithoutDeletedByInput> | Prisma.GameCreateWithoutDeletedByInput[] | Prisma.GameUncheckedCreateWithoutDeletedByInput[]
-  connectOrCreate?: Prisma.GameCreateOrConnectWithoutDeletedByInput | Prisma.GameCreateOrConnectWithoutDeletedByInput[]
-  upsert?: Prisma.GameUpsertWithWhereUniqueWithoutDeletedByInput | Prisma.GameUpsertWithWhereUniqueWithoutDeletedByInput[]
-  createMany?: Prisma.GameCreateManyDeletedByInputEnvelope
-  set?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  disconnect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  delete?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  connect?: Prisma.GameWhereUniqueInput | Prisma.GameWhereUniqueInput[]
-  update?: Prisma.GameUpdateWithWhereUniqueWithoutDeletedByInput | Prisma.GameUpdateWithWhereUniqueWithoutDeletedByInput[]
-  updateMany?: Prisma.GameUpdateManyWithWhereWithoutDeletedByInput | Prisma.GameUpdateManyWithWhereWithoutDeletedByInput[]
-  deleteMany?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
 export type EnumGameStatusFieldUpdateOperationsInput = {
   set?: $Enums.GameStatus
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type NullableEnumGameColorFieldUpdateOperationsInput = {
   set?: $Enums.GameColor | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type GameCreateNestedOneWithoutMovesInput = {
@@ -833,362 +619,11 @@ export type GameUpdateOneRequiredWithoutMovesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.GameUpdateToOneWithWhereWithoutMovesInput, Prisma.GameUpdateWithoutMovesInput>, Prisma.GameUncheckedUpdateWithoutMovesInput>
 }
 
-export type GameCreateWithoutWhitePlayerInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  blackPlayer?: Prisma.UserCreateNestedOneWithoutBlackGamesInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedGamesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedGamesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedGamesInput
-  moves?: Prisma.GameMoveCreateNestedManyWithoutGameInput
-}
-
-export type GameUncheckedCreateWithoutWhitePlayerInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  blackPlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-  moves?: Prisma.GameMoveUncheckedCreateNestedManyWithoutGameInput
-}
-
-export type GameCreateOrConnectWithoutWhitePlayerInput = {
-  where: Prisma.GameWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameCreateWithoutWhitePlayerInput, Prisma.GameUncheckedCreateWithoutWhitePlayerInput>
-}
-
-export type GameCreateManyWhitePlayerInputEnvelope = {
-  data: Prisma.GameCreateManyWhitePlayerInput | Prisma.GameCreateManyWhitePlayerInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameCreateWithoutBlackPlayerInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  whitePlayer?: Prisma.UserCreateNestedOneWithoutWhiteGamesInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedGamesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedGamesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedGamesInput
-  moves?: Prisma.GameMoveCreateNestedManyWithoutGameInput
-}
-
-export type GameUncheckedCreateWithoutBlackPlayerInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  whitePlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-  moves?: Prisma.GameMoveUncheckedCreateNestedManyWithoutGameInput
-}
-
-export type GameCreateOrConnectWithoutBlackPlayerInput = {
-  where: Prisma.GameWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameCreateWithoutBlackPlayerInput, Prisma.GameUncheckedCreateWithoutBlackPlayerInput>
-}
-
-export type GameCreateManyBlackPlayerInputEnvelope = {
-  data: Prisma.GameCreateManyBlackPlayerInput | Prisma.GameCreateManyBlackPlayerInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameCreateWithoutCreatedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  whitePlayer?: Prisma.UserCreateNestedOneWithoutWhiteGamesInput
-  blackPlayer?: Prisma.UserCreateNestedOneWithoutBlackGamesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedGamesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedGamesInput
-  moves?: Prisma.GameMoveCreateNestedManyWithoutGameInput
-}
-
-export type GameUncheckedCreateWithoutCreatedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  whitePlayerId?: string | null
-  blackPlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
-  moves?: Prisma.GameMoveUncheckedCreateNestedManyWithoutGameInput
-}
-
-export type GameCreateOrConnectWithoutCreatedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameCreateWithoutCreatedByInput, Prisma.GameUncheckedCreateWithoutCreatedByInput>
-}
-
-export type GameCreateManyCreatedByInputEnvelope = {
-  data: Prisma.GameCreateManyCreatedByInput | Prisma.GameCreateManyCreatedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameCreateWithoutUpdatedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  whitePlayer?: Prisma.UserCreateNestedOneWithoutWhiteGamesInput
-  blackPlayer?: Prisma.UserCreateNestedOneWithoutBlackGamesInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedGamesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedGamesInput
-  moves?: Prisma.GameMoveCreateNestedManyWithoutGameInput
-}
-
-export type GameUncheckedCreateWithoutUpdatedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  whitePlayerId?: string | null
-  blackPlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
-  moves?: Prisma.GameMoveUncheckedCreateNestedManyWithoutGameInput
-}
-
-export type GameCreateOrConnectWithoutUpdatedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameCreateWithoutUpdatedByInput, Prisma.GameUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type GameCreateManyUpdatedByInputEnvelope = {
-  data: Prisma.GameCreateManyUpdatedByInput | Prisma.GameCreateManyUpdatedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameCreateWithoutDeletedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  whitePlayer?: Prisma.UserCreateNestedOneWithoutWhiteGamesInput
-  blackPlayer?: Prisma.UserCreateNestedOneWithoutBlackGamesInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedGamesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedGamesInput
-  moves?: Prisma.GameMoveCreateNestedManyWithoutGameInput
-}
-
-export type GameUncheckedCreateWithoutDeletedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  whitePlayerId?: string | null
-  blackPlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  moves?: Prisma.GameMoveUncheckedCreateNestedManyWithoutGameInput
-}
-
-export type GameCreateOrConnectWithoutDeletedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameCreateWithoutDeletedByInput, Prisma.GameUncheckedCreateWithoutDeletedByInput>
-}
-
-export type GameCreateManyDeletedByInputEnvelope = {
-  data: Prisma.GameCreateManyDeletedByInput | Prisma.GameCreateManyDeletedByInput[]
-  skipDuplicates?: boolean
-}
-
-export type GameUpsertWithWhereUniqueWithoutWhitePlayerInput = {
-  where: Prisma.GameWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameUpdateWithoutWhitePlayerInput, Prisma.GameUncheckedUpdateWithoutWhitePlayerInput>
-  create: Prisma.XOR<Prisma.GameCreateWithoutWhitePlayerInput, Prisma.GameUncheckedCreateWithoutWhitePlayerInput>
-}
-
-export type GameUpdateWithWhereUniqueWithoutWhitePlayerInput = {
-  where: Prisma.GameWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameUpdateWithoutWhitePlayerInput, Prisma.GameUncheckedUpdateWithoutWhitePlayerInput>
-}
-
-export type GameUpdateManyWithWhereWithoutWhitePlayerInput = {
-  where: Prisma.GameScalarWhereInput
-  data: Prisma.XOR<Prisma.GameUpdateManyMutationInput, Prisma.GameUncheckedUpdateManyWithoutWhitePlayerInput>
-}
-
-export type GameScalarWhereInput = {
-  AND?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-  OR?: Prisma.GameScalarWhereInput[]
-  NOT?: Prisma.GameScalarWhereInput | Prisma.GameScalarWhereInput[]
-  id?: Prisma.StringFilter<"Game"> | string
-  status?: Prisma.EnumGameStatusFilter<"Game"> | $Enums.GameStatus
-  whitePlayerId?: Prisma.StringNullableFilter<"Game"> | string | null
-  blackPlayerId?: Prisma.StringNullableFilter<"Game"> | string | null
-  winnerColor?: Prisma.EnumGameColorNullableFilter<"Game"> | $Enums.GameColor | null
-  startedAt?: Prisma.DateTimeNullableFilter<"Game"> | Date | string | null
-  endedAt?: Prisma.DateTimeNullableFilter<"Game"> | Date | string | null
-  lastMoveAt?: Prisma.DateTimeNullableFilter<"Game"> | Date | string | null
-  initialFen?: Prisma.StringFilter<"Game"> | string
-  finalFen?: Prisma.StringNullableFilter<"Game"> | string | null
-  resultReason?: Prisma.StringNullableFilter<"Game"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Game"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Game"> | Date | string
-  deletedAt?: Prisma.DateTimeNullableFilter<"Game"> | Date | string | null
-  createdById?: Prisma.StringNullableFilter<"Game"> | string | null
-  updatedById?: Prisma.StringNullableFilter<"Game"> | string | null
-  deletedById?: Prisma.StringNullableFilter<"Game"> | string | null
-}
-
-export type GameUpsertWithWhereUniqueWithoutBlackPlayerInput = {
-  where: Prisma.GameWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameUpdateWithoutBlackPlayerInput, Prisma.GameUncheckedUpdateWithoutBlackPlayerInput>
-  create: Prisma.XOR<Prisma.GameCreateWithoutBlackPlayerInput, Prisma.GameUncheckedCreateWithoutBlackPlayerInput>
-}
-
-export type GameUpdateWithWhereUniqueWithoutBlackPlayerInput = {
-  where: Prisma.GameWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameUpdateWithoutBlackPlayerInput, Prisma.GameUncheckedUpdateWithoutBlackPlayerInput>
-}
-
-export type GameUpdateManyWithWhereWithoutBlackPlayerInput = {
-  where: Prisma.GameScalarWhereInput
-  data: Prisma.XOR<Prisma.GameUpdateManyMutationInput, Prisma.GameUncheckedUpdateManyWithoutBlackPlayerInput>
-}
-
-export type GameUpsertWithWhereUniqueWithoutCreatedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameUpdateWithoutCreatedByInput, Prisma.GameUncheckedUpdateWithoutCreatedByInput>
-  create: Prisma.XOR<Prisma.GameCreateWithoutCreatedByInput, Prisma.GameUncheckedCreateWithoutCreatedByInput>
-}
-
-export type GameUpdateWithWhereUniqueWithoutCreatedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameUpdateWithoutCreatedByInput, Prisma.GameUncheckedUpdateWithoutCreatedByInput>
-}
-
-export type GameUpdateManyWithWhereWithoutCreatedByInput = {
-  where: Prisma.GameScalarWhereInput
-  data: Prisma.XOR<Prisma.GameUpdateManyMutationInput, Prisma.GameUncheckedUpdateManyWithoutCreatedByInput>
-}
-
-export type GameUpsertWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameUpdateWithoutUpdatedByInput, Prisma.GameUncheckedUpdateWithoutUpdatedByInput>
-  create: Prisma.XOR<Prisma.GameCreateWithoutUpdatedByInput, Prisma.GameUncheckedCreateWithoutUpdatedByInput>
-}
-
-export type GameUpdateWithWhereUniqueWithoutUpdatedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameUpdateWithoutUpdatedByInput, Prisma.GameUncheckedUpdateWithoutUpdatedByInput>
-}
-
-export type GameUpdateManyWithWhereWithoutUpdatedByInput = {
-  where: Prisma.GameScalarWhereInput
-  data: Prisma.XOR<Prisma.GameUpdateManyMutationInput, Prisma.GameUncheckedUpdateManyWithoutUpdatedByInput>
-}
-
-export type GameUpsertWithWhereUniqueWithoutDeletedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  update: Prisma.XOR<Prisma.GameUpdateWithoutDeletedByInput, Prisma.GameUncheckedUpdateWithoutDeletedByInput>
-  create: Prisma.XOR<Prisma.GameCreateWithoutDeletedByInput, Prisma.GameUncheckedCreateWithoutDeletedByInput>
-}
-
-export type GameUpdateWithWhereUniqueWithoutDeletedByInput = {
-  where: Prisma.GameWhereUniqueInput
-  data: Prisma.XOR<Prisma.GameUpdateWithoutDeletedByInput, Prisma.GameUncheckedUpdateWithoutDeletedByInput>
-}
-
-export type GameUpdateManyWithWhereWithoutDeletedByInput = {
-  where: Prisma.GameScalarWhereInput
-  data: Prisma.XOR<Prisma.GameUpdateManyMutationInput, Prisma.GameUncheckedUpdateManyWithoutDeletedByInput>
-}
-
 export type GameCreateWithoutMovesInput = {
   id?: string
   status?: $Enums.GameStatus
+  whitePlayerId?: string | null
+  blackPlayerId?: string | null
   winnerColor?: $Enums.GameColor | null
   startedAt?: Date | string | null
   endedAt?: Date | string | null
@@ -1199,11 +634,9 @@ export type GameCreateWithoutMovesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  whitePlayer?: Prisma.UserCreateNestedOneWithoutWhiteGamesInput
-  blackPlayer?: Prisma.UserCreateNestedOneWithoutBlackGamesInput
-  createdBy?: Prisma.UserCreateNestedOneWithoutCreatedGamesInput
-  updatedBy?: Prisma.UserCreateNestedOneWithoutUpdatedGamesInput
-  deletedBy?: Prisma.UserCreateNestedOneWithoutDeletedGamesInput
+  createdById?: string | null
+  updatedById?: string | null
+  deletedById?: string | null
 }
 
 export type GameUncheckedCreateWithoutMovesInput = {
@@ -1245,6 +678,8 @@ export type GameUpdateToOneWithWhereWithoutMovesInput = {
 export type GameUpdateWithoutMovesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
+  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
   startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1255,11 +690,9 @@ export type GameUpdateWithoutMovesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  whitePlayer?: Prisma.UserUpdateOneWithoutWhiteGamesNestedInput
-  blackPlayer?: Prisma.UserUpdateOneWithoutBlackGamesNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedGamesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedGamesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedGamesNestedInput
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type GameUncheckedUpdateWithoutMovesInput = {
@@ -1280,396 +713,6 @@ export type GameUncheckedUpdateWithoutMovesInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameCreateManyWhitePlayerInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  blackPlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-}
-
-export type GameCreateManyBlackPlayerInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  whitePlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-  deletedById?: string | null
-}
-
-export type GameCreateManyCreatedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  whitePlayerId?: string | null
-  blackPlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  updatedById?: string | null
-  deletedById?: string | null
-}
-
-export type GameCreateManyUpdatedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  whitePlayerId?: string | null
-  blackPlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  deletedById?: string | null
-}
-
-export type GameCreateManyDeletedByInput = {
-  id?: string
-  status?: $Enums.GameStatus
-  whitePlayerId?: string | null
-  blackPlayerId?: string | null
-  winnerColor?: $Enums.GameColor | null
-  startedAt?: Date | string | null
-  endedAt?: Date | string | null
-  lastMoveAt?: Date | string | null
-  initialFen?: string
-  finalFen?: string | null
-  resultReason?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  createdById?: string | null
-  updatedById?: string | null
-}
-
-export type GameUpdateWithoutWhitePlayerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  blackPlayer?: Prisma.UserUpdateOneWithoutBlackGamesNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedGamesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedGamesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedGamesNestedInput
-  moves?: Prisma.GameMoveUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateWithoutWhitePlayerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  moves?: Prisma.GameMoveUncheckedUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateManyWithoutWhitePlayerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameUpdateWithoutBlackPlayerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  whitePlayer?: Prisma.UserUpdateOneWithoutWhiteGamesNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedGamesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedGamesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedGamesNestedInput
-  moves?: Prisma.GameMoveUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateWithoutBlackPlayerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  moves?: Prisma.GameMoveUncheckedUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateManyWithoutBlackPlayerInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  whitePlayer?: Prisma.UserUpdateOneWithoutWhiteGamesNestedInput
-  blackPlayer?: Prisma.UserUpdateOneWithoutBlackGamesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedGamesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedGamesNestedInput
-  moves?: Prisma.GameMoveUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  moves?: Prisma.GameMoveUncheckedUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateManyWithoutCreatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  whitePlayer?: Prisma.UserUpdateOneWithoutWhiteGamesNestedInput
-  blackPlayer?: Prisma.UserUpdateOneWithoutBlackGamesNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedGamesNestedInput
-  deletedBy?: Prisma.UserUpdateOneWithoutDeletedGamesNestedInput
-  moves?: Prisma.GameMoveUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  moves?: Prisma.GameMoveUncheckedUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateManyWithoutUpdatedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type GameUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  whitePlayer?: Prisma.UserUpdateOneWithoutWhiteGamesNestedInput
-  blackPlayer?: Prisma.UserUpdateOneWithoutBlackGamesNestedInput
-  createdBy?: Prisma.UserUpdateOneWithoutCreatedGamesNestedInput
-  updatedBy?: Prisma.UserUpdateOneWithoutUpdatedGamesNestedInput
-  moves?: Prisma.GameMoveUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  moves?: Prisma.GameMoveUncheckedUpdateManyWithoutGameNestedInput
-}
-
-export type GameUncheckedUpdateManyWithoutDeletedByInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumGameStatusFieldUpdateOperationsInput | $Enums.GameStatus
-  whitePlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  blackPlayerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  winnerColor?: Prisma.NullableEnumGameColorFieldUpdateOperationsInput | $Enums.GameColor | null
-  startedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  endedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lastMoveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  initialFen?: Prisma.StringFieldUpdateOperationsInput | string
-  finalFen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  resultReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  updatedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1721,11 +764,6 @@ export type GameSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
-  whitePlayer?: boolean | Prisma.Game$whitePlayerArgs<ExtArgs>
-  blackPlayer?: boolean | Prisma.Game$blackPlayerArgs<ExtArgs>
-  createdBy?: boolean | Prisma.Game$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.Game$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.Game$deletedByArgs<ExtArgs>
   moves?: boolean | Prisma.Game$movesArgs<ExtArgs>
   _count?: boolean | Prisma.GameCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["game"]>
@@ -1748,11 +786,6 @@ export type GameSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
-  whitePlayer?: boolean | Prisma.Game$whitePlayerArgs<ExtArgs>
-  blackPlayer?: boolean | Prisma.Game$blackPlayerArgs<ExtArgs>
-  createdBy?: boolean | Prisma.Game$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.Game$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.Game$deletedByArgs<ExtArgs>
 }, ExtArgs["result"]["game"]>
 
 export type GameSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1773,11 +806,6 @@ export type GameSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdById?: boolean
   updatedById?: boolean
   deletedById?: boolean
-  whitePlayer?: boolean | Prisma.Game$whitePlayerArgs<ExtArgs>
-  blackPlayer?: boolean | Prisma.Game$blackPlayerArgs<ExtArgs>
-  createdBy?: boolean | Prisma.Game$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.Game$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.Game$deletedByArgs<ExtArgs>
 }, ExtArgs["result"]["game"]>
 
 export type GameSelectScalar = {
@@ -1802,37 +830,15 @@ export type GameSelectScalar = {
 
 export type GameOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "whitePlayerId" | "blackPlayerId" | "winnerColor" | "startedAt" | "endedAt" | "lastMoveAt" | "initialFen" | "finalFen" | "resultReason" | "createdAt" | "updatedAt" | "deletedAt" | "createdById" | "updatedById" | "deletedById", ExtArgs["result"]["game"]>
 export type GameInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  whitePlayer?: boolean | Prisma.Game$whitePlayerArgs<ExtArgs>
-  blackPlayer?: boolean | Prisma.Game$blackPlayerArgs<ExtArgs>
-  createdBy?: boolean | Prisma.Game$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.Game$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.Game$deletedByArgs<ExtArgs>
   moves?: boolean | Prisma.Game$movesArgs<ExtArgs>
   _count?: boolean | Prisma.GameCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type GameIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  whitePlayer?: boolean | Prisma.Game$whitePlayerArgs<ExtArgs>
-  blackPlayer?: boolean | Prisma.Game$blackPlayerArgs<ExtArgs>
-  createdBy?: boolean | Prisma.Game$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.Game$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.Game$deletedByArgs<ExtArgs>
-}
-export type GameIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  whitePlayer?: boolean | Prisma.Game$whitePlayerArgs<ExtArgs>
-  blackPlayer?: boolean | Prisma.Game$blackPlayerArgs<ExtArgs>
-  createdBy?: boolean | Prisma.Game$createdByArgs<ExtArgs>
-  updatedBy?: boolean | Prisma.Game$updatedByArgs<ExtArgs>
-  deletedBy?: boolean | Prisma.Game$deletedByArgs<ExtArgs>
-}
+export type GameIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type GameIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $GamePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Game"
   objects: {
-    whitePlayer: Prisma.$UserPayload<ExtArgs> | null
-    blackPlayer: Prisma.$UserPayload<ExtArgs> | null
-    createdBy: Prisma.$UserPayload<ExtArgs> | null
-    updatedBy: Prisma.$UserPayload<ExtArgs> | null
-    deletedBy: Prisma.$UserPayload<ExtArgs> | null
     moves: Prisma.$GameMovePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2247,11 +1253,6 @@ readonly fields: GameFieldRefs;
  */
 export interface Prisma__GameClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  whitePlayer<T extends Prisma.Game$whitePlayerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Game$whitePlayerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  blackPlayer<T extends Prisma.Game$blackPlayerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Game$blackPlayerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  createdBy<T extends Prisma.Game$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Game$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  updatedBy<T extends Prisma.Game$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Game$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  deletedBy<T extends Prisma.Game$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Game$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   moves<T extends Prisma.Game$movesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Game$movesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GameMovePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2553,10 +1554,6 @@ export type GameCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.GameCreateManyInput | Prisma.GameCreateManyInput[]
   skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.GameIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2627,10 +1624,6 @@ export type GameUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Games to update.
    */
   limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.GameIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2697,101 +1690,6 @@ export type GameDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Games to delete.
    */
   limit?: number
-}
-
-/**
- * Game.whitePlayer
- */
-export type Game$whitePlayerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * Game.blackPlayer
- */
-export type Game$blackPlayerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * Game.createdBy
- */
-export type Game$createdByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * Game.updatedBy
- */
-export type Game$updatedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
- * Game.deletedBy
- */
-export type Game$deletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
 }
 
 /**
